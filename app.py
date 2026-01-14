@@ -4,9 +4,12 @@ from PIL import Image
 import os
 
 # Paths
-PROJECT_DIR = "/content/drive/MyDrive/yoruba-captioning"
-IMAGE_DIR = os.path.join(PROJECT_DIR, "images/Flicker8k_Dataset")
+PROJECT_DIR = os.path.dirname(__file__)  # folder where app.py is
+IMAGE_DIR = os.path.join(PROJECT_DIR, "images")  # folder for images
 CSV_PATH = os.path.join(PROJECT_DIR, "yoruba_gold_200.csv")
+
+# Make sure the images folder exists
+os.makedirs(IMAGE_DIR, exist_ok=True)
 
 # Load data
 df = pd.read_csv(CSV_PATH)
