@@ -20,6 +20,37 @@ df = df.rename(columns={"Unnamed: 2": "yoruba_caption"})
 st.title("Bilingual Image Captioning (English–Yoruba)")
 st.write("Course Project Demo")
 
+st.subheader("Upload a new image and captions")
+
+# Upload new image
+uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+
+# Input captions
+english_caption = st.text_input("English Caption")
+yoruba_caption = st.text_input("Yoruba Caption")
+
+if uploaded_file and english_caption and yoruba_caption:
+    # Save image to images folder
+    image_name = uploaded_file.name
+    image_path = os.path.join(IMAGE_DIR, image_name)
+
+    if not os.path.exists(image_path):
+        with open(image_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+
+        # Add new row to dataframe
+        new_row = {"image_name": image_name,
+                   "english_caption": english_caption,
+                   "yoruba_caption": yoruba_caption}
+        df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+
+        # Save updated CSV
+        df.to_csv(CSV_PATH, index=False)
+
+        st.success(f"Image '{image_name}' and captions added successfully!")
+    else:
+        st.warning("This image already exists in the dataset.")
+
 # Image selector
 image_name = st.selectbox("Select an image", df["image_name"].tolist())
 
