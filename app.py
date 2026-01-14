@@ -3,13 +3,18 @@ import pandas as pd
 from PIL import Image
 import os
 
-# Paths
-PROJECT_DIR = "/content/drive/MyDrive/yoruba-captioning"
-IMAGE_DIR = os.path.join(PROJECT_DIR, "images/Flicker8k_Dataset")
+# -------------------------------
+# Paths (Streamlit Cloud / GitHub)
+# -------------------------------
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(PROJECT_DIR, "yoruba_gold_200.csv")
 
-# Load data
-df = pd.read_csv(CSV_PATH)
+# Load data safely
+if os.path.exists(CSV_PATH):
+    df = pd.read_csv(CSV_PATH)
+else:
+    st.error("CSV file not found in repo root.")
+    st.stop()
 
 # Rename Yoruba column
 df = df.rename(columns={"Unnamed: 2": "yoruba_caption"})
