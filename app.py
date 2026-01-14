@@ -37,5 +37,6 @@ st.image(image, caption=image_name, use_column_width=True)
 st.subheader("English Caption")
 st.write(row["english_caption"])
 
-st.subheader("Yoruba Caption (Reference)")
+st.subheader("Yoruba Caption")
 st.write(row["yoruba_caption"])
+
