@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image
 import os
 
-# Paths
+# Paths 
 PROJECT_DIR = os.path.dirname(__file__)  # folder where app.py is
 IMAGE_DIR = os.path.join(PROJECT_DIR, "images")  # folder for images
 CSV_PATH = os.path.join(PROJECT_DIR, "yoruba_gold_200.csv")
